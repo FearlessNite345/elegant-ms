@@ -1,5 +1,86 @@
-import { msToTimeOptions } from './types';
+import { discordTimestamps, msToTimeOptions } from './types';
 
+/**
+ *
+ * @param ms - Milliseconds to convert to discord timestamp string
+ * @param type - The type of discord timestamp string you want returned
+ * @returns
+ */
+export function msToDiscordTimestampString(
+    ms: number,
+    type: discordTimestamps
+): string {
+    const seconds = ms / 1000;
+
+    switch (type) {
+        case discordTimestamps.Default:
+            return `<t:${seconds}>`;
+
+        case discordTimestamps.LongDate:
+            return `<t:${seconds}:D>`;
+
+        case discordTimestamps.LongDateTime:
+            return `<t:${seconds}:F>`;
+
+        case discordTimestamps.LongTime:
+            return `<t:${seconds}:T>`;
+
+        case discordTimestamps.RelativeTime:
+            return `<t:${seconds}:R>`;
+
+        case discordTimestamps.ShortDate:
+            return `<t:${seconds}:d>`;
+
+        case discordTimestamps.ShortDateTime:
+            return `<t:${seconds}:f>`;
+
+        case discordTimestamps.ShortTime:
+            return `<t:${seconds}:t>`;
+    }
+}
+
+/**
+ *
+ * @param timeString - Time string should be something like "1d 10h 10m 10s"
+ * @returns
+ */
+export function stringToMS(timeString: string): number {
+    const sections = timeString.toLowerCase().split(' '); // Split the input string by space
+
+    let milliseconds = 0;
+    let sign = 1; // To handle negative values
+
+    for (const section of sections) {
+        if (section.startsWith('-')) {
+            // Handle negative values
+            sign = -1;
+        } else if (section.endsWith('d')) {
+            // Days
+            const value = parseInt(section);
+            milliseconds += sign * value * 24 * 60 * 60 * 1000; // Convert days to milliseconds
+        } else if (section.endsWith('h')) {
+            // Hours
+            const value = parseInt(section);
+            milliseconds += sign * value * 60 * 60 * 1000; // Convert hours to milliseconds
+        } else if (section.endsWith('m')) {
+            // Minutes
+            const value = parseInt(section);
+            milliseconds += sign * value * 60 * 1000; // Convert minutes to milliseconds
+        } else if (section.endsWith('s')) {
+            // Seconds
+            const value = parseInt(section);
+            milliseconds += sign * value * 1000; // Convert seconds to milliseconds
+        }
+    }
+
+    return milliseconds;
+}
+
+/**
+ *
+ * @param ms - Milliseconds to convert
+ * @returns
+ */
 export function msToDateString(ms: number): string {
     const date = new Date(ms);
 
@@ -69,6 +150,11 @@ export function msToDuration(
     return time;
 }
 
+/**
+ *
+ * @param ms - Milliseconds to convert
+ * @returns
+ */
 export function msToTimeString(ms: number): string {
     const date = new Date(ms);
 

@@ -16,3 +16,14 @@ export type msToTimeOptions = {
      */
     Compact?: boolean
 }
+
+export enum discordTimestamps {
+  Default,
+  ShortTime,
+  LongTime,
+  ShortDate,
+  LongDate,
+  ShortDateTime,
+  LongDateTime,
+  RelativeTime  
+}

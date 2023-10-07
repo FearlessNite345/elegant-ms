@@ -1,7 +1,7 @@
 {
   "name": "elegant-ms",
   "description": "Easily convery milliseconds to a human readable time",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -11,8 +11,10 @@
   "keywords": [
     "ms",
     "human readable",
-    "ms to time",
-    "elegant"
+    "time",
+    "elegant",
+    "discord",
+    "timestamp"
   ],
   "repository": {
     "type": "git",
