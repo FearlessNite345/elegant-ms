@@ -1,0 +1,23 @@
+{
+  "name": "ms-beautify",
+  "description": "Easily convery milliseconds to a human readable time",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [
+    "ms",
+    "human readable",
+    "ms to time",
+    "beautify"
+  ],
+  "author": "fearlessstudios",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  }
+}
