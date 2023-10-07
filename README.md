@@ -20,6 +20,10 @@ elegant-ms is a simple package library that helps you convert Milliseconds to a 
 
 ## Changelog
 
+#### v0.0.4
+
+-   Fixed issue where it would not throw a error if the stringToMS was not a valid string
+
 #### v0.0.3
 
 -   Added support for converting milliseconds to discord timestamp string

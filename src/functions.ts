@@ -45,10 +45,11 @@ export function msToDiscordTimestampString(
  * @returns
  */
 export function stringToMS(timeString: string): number {
-    const sections = timeString.toLowerCase().split(' '); // Split the input string by space
+    const sections = timeString.split(' '); // Split the input string by space
 
     let milliseconds = 0;
     let sign = 1; // To handle negative values
+    let validSectionFound = false; // Flag to check if at least one valid part was found
 
     for (const section of sections) {
         if (section.startsWith('-')) {
@@ -57,20 +58,38 @@ export function stringToMS(timeString: string): number {
         } else if (section.endsWith('d')) {
             // Days
             const value = parseInt(section);
-            milliseconds += sign * value * 24 * 60 * 60 * 1000; // Convert days to milliseconds
+            if (!isNaN(value)) {
+                milliseconds += sign * value * 24 * 60 * 60 * 1000; // Convert days to milliseconds
+                validSectionFound = true;
+            }
         } else if (section.endsWith('h')) {
             // Hours
             const value = parseInt(section);
-            milliseconds += sign * value * 60 * 60 * 1000; // Convert hours to milliseconds
+            if (!isNaN(value)) {
+                milliseconds += sign * value * 60 * 60 * 1000; // Convert hours to milliseconds
+                validSectionFound = true;
+            }
         } else if (section.endsWith('m')) {
             // Minutes
             const value = parseInt(section);
-            milliseconds += sign * value * 60 * 1000; // Convert minutes to milliseconds
+            if (!isNaN(value)) {
+                milliseconds += sign * value * 60 * 1000; // Convert minutes to milliseconds
+                validSectionFound = true;
+            }
         } else if (section.endsWith('s')) {
             // Seconds
             const value = parseInt(section);
-            milliseconds += sign * value * 1000; // Convert seconds to milliseconds
+            if (!isNaN(value)) {
+                milliseconds += sign * value * 1000; // Convert seconds to milliseconds
+                validSectionFound = true;
+            }
         }
+    }
+
+    if (!validSectionFound) {
+        throw new Error(
+            'Invalid time string. No valid time input found. (1h 15m)'
+        );
     }
 
     return milliseconds;
