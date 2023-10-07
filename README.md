@@ -1,11 +1,11 @@
-# ms-beautify
+# elegant-ms
 
 <div align="center">
-    <a href="https://www.npmjs.com/package/ms-beautify"><img src="https://img.shields.io/npm/v/ms-beautify?maxAge=3600" alt="npm version" /></a>
-    <a href="https://www.npmjs.com/package/ms-beautify"><img src="https://img.shields.io/npm/dt/ms-beautify?maxAge=3600" alt="npm downloads" /></a>
+    <a href="https://www.npmjs.com/package/elegant-ms"><img src="https://img.shields.io/npm/v/elegant-ms?maxAge=3600" alt="npm version" /></a>
+    <a href="https://www.npmjs.com/package/elegant-ms"><img src="https://img.shields.io/npm/dt/elegant-ms?maxAge=3600" alt="npm downloads" /></a>
 </div>
 
-ms-beautify is a simple package library that helps you convert Milliseconds to a human readable format
+elegant-ms is a simple package library that helps you convert Milliseconds to a human readable format
 
 ## Features
 
@@ -17,7 +17,7 @@ ms-beautify is a simple package library that helps you convert Milliseconds to a
 ## Installation
 
 ```bash
-npm install ms-beautify
+npm install elegant-ms
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ npm install ms-beautify
 This is a small usage example of how you can use this package
 
 ```js
-const { msToDuration } = require('ms-beautify')
+const { msToDuration } = require('elegant-ms')
 
 console.log(msToDuration(65_000))
 ```
