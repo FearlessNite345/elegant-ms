@@ -20,14 +20,13 @@ elegant-ms is a simple package library that helps you convert Milliseconds to a 
 
 ## Changelog
 
+#### v0.0.5
+
+-   Improved error handling of the stringToMS function
+
 #### v0.0.4
 
 -   Fixed issue where it would not throw a error if the stringToMS was not a valid string
-
-#### v0.0.3
-
--   Added support for converting milliseconds to discord timestamp string
--   Added support to convert string to milliseconds
 
 ## Installation
 
@@ -42,5 +41,5 @@ This is a small usage example of how you can use this package
 ```js
 const { msToDuration } = require('elegant-ms');
 
-console.log(msToDuration(65_000));
+console.log(msToDuration(65_000)); // -> 1m 5s
 ```

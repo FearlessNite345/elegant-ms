@@ -42,54 +42,50 @@ export function msToDiscordTimestampString(
 /**
  *
  * @param timeString - Time string should be something like "1d 10h 10m 10s"
- * @returns
+ * @returns The time in milliseconds Note: if it returns -1 then that means a invalid string was given
  */
 export function stringToMS(timeString: string): number {
     const sections = timeString.split(' '); // Split the input string by space
 
     let milliseconds = 0;
-    let sign = 1; // To handle negative values
     let validSectionFound = false; // Flag to check if at least one valid part was found
 
     for (const section of sections) {
         if (section.startsWith('-')) {
-            // Handle negative values
-            sign = -1;
+            return -1;
         } else if (section.endsWith('d')) {
             // Days
             const value = parseInt(section);
             if (!isNaN(value)) {
-                milliseconds += sign * value * 24 * 60 * 60 * 1000; // Convert days to milliseconds
+                milliseconds += value * 24 * 60 * 60 * 1000; // Convert days to milliseconds
                 validSectionFound = true;
             }
         } else if (section.endsWith('h')) {
             // Hours
             const value = parseInt(section);
             if (!isNaN(value)) {
-                milliseconds += sign * value * 60 * 60 * 1000; // Convert hours to milliseconds
+                milliseconds += value * 60 * 60 * 1000; // Convert hours to milliseconds
                 validSectionFound = true;
             }
         } else if (section.endsWith('m')) {
             // Minutes
             const value = parseInt(section);
             if (!isNaN(value)) {
-                milliseconds += sign * value * 60 * 1000; // Convert minutes to milliseconds
+                milliseconds += value * 60 * 1000; // Convert minutes to milliseconds
                 validSectionFound = true;
             }
         } else if (section.endsWith('s')) {
             // Seconds
             const value = parseInt(section);
             if (!isNaN(value)) {
-                milliseconds += sign * value * 1000; // Convert seconds to milliseconds
+                milliseconds += value * 1000; // Convert seconds to milliseconds
                 validSectionFound = true;
             }
         }
     }
 
     if (!validSectionFound) {
-        throw new Error(
-            'Invalid time string. No valid time input found. (1h 15m)'
-        );
+        return -1;
     }
 
     return milliseconds;
@@ -132,36 +128,34 @@ export function msToDuration(
     let days = Math.floor(ms / (1000 * 60 * 60 * 24));
     let time = '';
     if (days > 0) {
-        options.LongFormat
-            ? (time += days + ' Days, ')
-            : (time += days + ' D ');
+        options.LongFormat ? (time += days + ' Days ') : (time += days + ' D ');
         ms -= days * (1000 * 60 * 60 * 24);
         if (options.Compact) return time;
     }
     if (hours > 0) {
         options.LongFormat
-            ? (time += hours + ' Hours, ')
+            ? (time += hours + ' Hours ')
             : (time += hours + ' H ');
         ms -= hours * (1000 * 60 * 60);
         if (options.Compact) return time;
     }
     if (minutes > 0) {
         options.LongFormat
-            ? (time += minutes + ' Minutes, ')
+            ? (time += minutes + ' Minutes ')
             : (time += minutes + ' M ');
         ms -= minutes * (1000 * 60);
         if (options.Compact) return time;
     }
     if (seconds > 0) {
         options.LongFormat
-            ? (time += seconds + ' Seconds, ')
+            ? (time += seconds + ' Seconds ')
             : (time += seconds + ' S ');
         ms -= seconds * 1000;
         if (options.Compact) return time;
     }
     if (ms > 0) {
         options.LongFormat
-            ? (time += ms + ' Milliseconds, ')
+            ? (time += ms + ' Milliseconds ')
             : (time += ms + ' MS ');
         if (options.Compact) return time;
     }
