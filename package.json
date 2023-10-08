@@ -1,7 +1,7 @@
 {
   "name": "elegant-ms",
   "description": "Easily convery milliseconds to a human readable time",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
