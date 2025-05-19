@@ -1,2 +1,3 @@
-export * from './functions';
+export * from './ms';
+export * from './seconds'
 export * from './types'
